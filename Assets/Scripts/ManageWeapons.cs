@@ -5,6 +5,7 @@ public class ManageWeapons : MonoBehaviour
     [SerializeField]
     Camera playersCamera;
     Ray rayFromPlayer;
+    RaycastHit hit;
     //use this for initialisation
     void Start()
     {
@@ -15,5 +16,9 @@ public class ManageWeapons : MonoBehaviour
     {
         rayFromPlayer = playersCamera.ScreenPointToRay (new Vector3 (Screen.width/2, Screen.height/2));
         Debug.DrawRay(rayFromPlayer.origin, rayFromPlayer.direction * 100, Color.red);
+        if (Physics.Raycast(rayFromPlayer, out hit, 100))
+        {
+            print(" The object " + hit.collider.gameObject.name + " is in front of the player");
+        }
     }
 }
